@@ -17,5 +17,8 @@ body{
 }
 
 #results{
+    width: 100%;
+    text-align: center;
     margin-top: 40px;
+    padding: 0 32px;
 }

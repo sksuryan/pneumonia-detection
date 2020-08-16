@@ -2,11 +2,10 @@ const imgInput = document.querySelector('#upload-form')
 const label = document.querySelector('.file-name')
 const submitButton = document.querySelector('#submit')
 const results = document.querySelector('#results')
+const inputDiv = document.querySelector('.file')
 
 async function submit(e,img) {
     e.preventDefault()
-
-    console.log('something')
 
     const formData = new FormData()
     formData.append('file', img)
@@ -27,8 +26,8 @@ async function submit(e,img) {
         })
         .catch(e => {
             console.log(e)
-            ubmitButton.classList.remove('is-loading')
-            results.innerHTML = `Results: ${data.reply}`
+            submitButton.classList.remove('is-loading')
+            results.innerHTML = 'Please upload an image 😨'
         })
 
     label.innerHTML = 'example.jpeg'
@@ -40,4 +39,20 @@ function updateFileName(){
     label.innerHTML = name
 }
 
+function widthChange(){
+    const width = window.innerWidth
+
+    if(width > 600){
+        submitButton.classList.remove('is-small')
+        inputDiv.classList.remove('is-small')
+    } else {
+        submitButton.classList.add('is-small')
+        inputDiv.classList.add('is-small')
+    }
+}
+
 submitButton.addEventListener('click',(e) => submit(e,imgInput.files[0]))
+
+window.addEventListener('resize',widthChange)
+
+widthChange()
